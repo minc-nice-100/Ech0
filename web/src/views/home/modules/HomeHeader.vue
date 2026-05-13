@@ -27,7 +27,7 @@
         >
           <Rss class="w-4 h-4" />
         </a>
-        <a
+        <!-- <a
           href="https://github.com/lin-snow/Ech0"
           target="_blank"
           rel="noopener noreferrer"
@@ -36,7 +36,7 @@
           class="home-header__link-icon"
         >
           <Github class="w-4 h-4" />
-        </a>
+        </a> -->
         <button
           type="button"
           v-tooltip="themeToggleTooltip"

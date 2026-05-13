@@ -916,7 +916,7 @@
   "about": {
     "linkAriaLabel": "关于本 Ech0 实例",
     "copyrightHeading": "版权",
-    "licenseLine": "本软件以",
+    "licenseLine": "开源协议：",
     "authorHeading": "作者",
     "authorGithub": "GitHub 主页",
     "sourceHeading": "源代码",
