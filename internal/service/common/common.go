@@ -145,6 +145,12 @@ func (s *CommonService) GenerateRSS(ctx *gin.Context) (string, error) {
 				return "", err
 			}
 
+			// 给 Atom XML 注入 XSLT 样式表声明：浏览器打开 /rss 时会用 /rss.xsl 渲染为
+			// 美化页面，而 RSS 阅读器仍按原始 XML 解析，订阅契约不变。
+			const xmlDecl = `<?xml version="1.0" encoding="UTF-8"?>`
+			const stylesheetPI = `<?xml-stylesheet type="text/xsl" href="/rss.xsl"?>`
+			atom = strings.Replace(atom, xmlDecl, xmlDecl+"\n"+stylesheetPI, 1)
+
 			s.commonRepository.TrackRSSCacheKey(cacheKey)
 			return atom, nil
 		},

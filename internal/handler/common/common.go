@@ -72,7 +72,15 @@ func (commonHandler *CommonHandler) GetRss(ctx *gin.Context) {
 		return
 	}
 
-	ctx.Data(http.StatusOK, "application/rss+xml; charset=utf-8", []byte(atom))
+	// 浏览器请求（Accept 含 text/html）按通用 XML 返回，触发 /rss.xsl 美化渲染；
+	// 订阅器请求按 application/atom+xml 返回，保持 RSS MIME 契约。
+	const browserContentType = "application/xml; charset=utf-8"
+	const feedContentType = "application/atom+xml; charset=utf-8"
+	contentType := feedContentType
+	if strings.Contains(ctx.GetHeader("Accept"), "text/html") {
+		contentType = browserContentType
+	}
+	ctx.Data(http.StatusOK, contentType, []byte(atom))
 }
 
 func (commonHandler *CommonHandler) HelloEch0() gin.HandlerFunc {
