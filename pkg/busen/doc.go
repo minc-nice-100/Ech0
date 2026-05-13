@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2025-2026 lin-snow
+
 // Package busen provides a small typed-first in-process event bus for Go.
 //
 // Busen is designed around a few explicit goals:

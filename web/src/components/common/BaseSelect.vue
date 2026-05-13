@@ -37,9 +37,7 @@
       <span
         :class="[
           'truncate flex-1',
-          selectedOption
-            ? 'text-[var(--color-text-primary)]'
-            : 'text-[var(--color-text-muted)]',
+          selectedOption ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-muted)]',
         ]"
       >
         {{ displayValue }}
