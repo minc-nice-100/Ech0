@@ -6,6 +6,35 @@ This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html),
 
 For releases prior to v4.6.5, see the [GitHub releases page](https://github.com/lin-snow/Ech0/releases) — earlier release notes are not retroactively imported here.
 
+## [4.8.0] - 2026-05-13
+
+### Added
+
+- **RSS feed now renders as a styled page when opened in a browser**. A new XSLT stylesheet at `web/public/rss.xsl` turns the raw Atom feed into a paper-themed reading view (light + dark, mobile-friendly) when the visitor's `Accept` header includes `text/html`; dedicated RSS readers still receive `application/atom+xml` with the same bytes, so the subscription contract is unchanged. The Atom document gets an inline `<?xml-stylesheet href="/rss.xsl"?>` PI, and the handler in `internal/handler/common/common.go` now content-type-switches on `Accept`.
+
+### Changed
+
+- **Echo detail dividers restyled.** The dashed `border-bottom` under the detail-page meta strip (`TheEchoDetail.vue`) and the dashed `border-top` above the interactions zone (`TheEchoInteractions.vue`) have been replaced with a repeating linear-gradient "stitched" rule (5px dash, 3px gap), so the divider stays crisp on retina displays and aligns with the wider design system.
+- **`HomeHeader` GitHub link hidden.** The Github icon next to the RSS button on the homepage header is commented out; only RSS, theme toggle, and the other built-in actions remain. The about page still surfaces the repo URL.
+- **Panel dashboard meta strip** no longer prints `VERSION x.y.z` — version is now surfaced only on the About page (the single source of truth from `internal/version`).
+- **Chinese license caption (about page) reworded** from "本软件以 …" ("This software is …") to "开源协议：…" ("Open-source license: …"), reading more naturally as a key/value pair rather than a sentence fragment.
+
+### Fixed
+
+- **`scripts/ech0.sh` install script** no longer 404s when a Helm chart release is published shortly after an app release. `chart-releaser-action` creates a `ech0-X.Y.Z` GitHub release for the Helm chart, which GitHub automatically flips to "latest" since it has a newer timestamp than the corresponding `vX.Y.Z` app release. The chart release only ships a `.tgz`, so `releases/latest/download/ech0-linux-<arch>.tar.gz` returned 404. The install script now hits the GitHub Releases API directly and picks the newest `v*` tag, hard-failing with a clear error if no matching release can be resolved.
+- **`release_helm.yml` workflow** now re-marks the originating `vX.Y.Z` app release as "Latest" after publishing the chart release, so the GitHub UI and tooling that resolves `/releases/latest` (browsers, install scripts, third-party mirrors) continue to land on the platform-binary release rather than the chart-only one.
+
+### Internal
+
+- **Vendored three previously external libraries into `pkg/`**, so the entire runtime now builds from this repo alone:
+  - `github.com/lin-snow/Busen` → `pkg/busen` (imported as `github.com/lin-snow/ech0/pkg/busen`) — async in-process event bus, ~5k LOC + tests.
+  - `github.com/lin-snow/VireFS` → `pkg/virefs` (imported as `github.com/lin-snow/ech0/pkg/virefs`) — unified local/S3 filesystem abstraction backing `internal/storage`, now with first-class **zip-archive support**: `plugin/zip/Unpack` (extract a zip into a destination with a key prefix) and a read-only `ZipFS` (`Get`/`List`/`Stat`/`Walk` over the archive). `S3Config` adds presets for AWS / MinIO / R2; `schema` adds extension-based routing; `Walk` supports directory skipping.
+  - `github.com/lin-snow/gocap` → `pkg/gocap` (imported via `internal/captcha` for the built-in CAPTCHA) — challenge/redeem PoW captcha core: `Service.Challenge` / `Service.Redeem` / `SiteVerify`, in-memory `memstore` with GC, HTTP transport (`/challenge`, `/redeem`, `/siteverify`), middleware (error handling, client-IP extraction), rate limiting, secret hashing (`HashSecret`, `SecureSecretEqual`), JWT-style `ChallengeClaims`. CLAUDE.md updated to point at the new import paths.
+- **SPDX-License-Identifier + Copyright headers** added to every file under `pkg/busen`, `pkg/virefs`, `pkg/gocap`, completing the AGPL-3.0 header coverage for the vendored sources.
+- **Dependency bumps (Go)**: `github.com/anthropics/anthropic-sdk-go` 1.38.0 → 1.41.0, `github.com/go-webauthn/webauthn` 0.17.2 → 0.17.3, `golang.org/x/mod` 0.35.0 → 0.36.0, `golang.org/x/net` 0.53.0 → 0.54.0, `golang.org/x/text` 0.36.0 → 0.37.0, `google.golang.org/genai` 1.55.0 → 1.56.0.
+- **Dependency bumps (`web/`)**: `@cap.js/widget` 0.1.46 → 0.1.50, `vue-virtual-scroller` 3.0.2 → 3.0.3, `@types/node` 25.6.0 → 25.6.2, `vite-plugin-vue-devtools` 8.1.1 → 8.1.2.
+- **Dependency bumps (`hub/`, `site/`)**: `fast-uri` 3.1.0 → 3.1.2 (transitive).
+
 ## [4.7.5] - 2026-05-07
 
 ### Added
@@ -140,7 +169,8 @@ This is primarily a security release: six advisories disclosed since v4.7.2 are 
 
   Practical risk in this repo was negligible (the vulnerable code only runs at PWA build time on developer-controlled input), but the alerts are now resolved at the supply-chain level.
 
-[Unreleased]: https://github.com/lin-snow/Ech0/compare/v4.7.5...HEAD
+[Unreleased]: https://github.com/lin-snow/Ech0/compare/v4.8.0...HEAD
+[4.8.0]: https://github.com/lin-snow/Ech0/compare/v4.7.5...v4.8.0
 [4.7.5]: https://github.com/lin-snow/Ech0/compare/v4.7.4...v4.7.5
 [4.7.4]: https://github.com/lin-snow/Ech0/compare/v4.7.3...v4.7.4
 [4.7.3]: https://github.com/lin-snow/Ech0/compare/v4.7.2...v4.7.3
