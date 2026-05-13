@@ -6,7 +6,7 @@ package registry
 import (
 	"context"
 
-	busen "github.com/lin-snow/Busen"
+	"github.com/lin-snow/ech0/pkg/busen"
 )
 
 type SubscriptionProvider interface {

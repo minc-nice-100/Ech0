@@ -11,6 +11,12 @@ linters:
   # - `fast`: enables only linters considered as "fast" (`golangci-lint help linters --json | jq '[ .[] | select(.fast==true) ] | map(.name)'`).
   # Default: standard
   default: standard
+  exclusions:
+    rules:
+      # pkg/virefs 内化自上游 VireFS，沿用其原有的 errcheck 习惯（defer Close() 等惯用法）。
+      - path: ^pkg/virefs/
+        linters:
+          - errcheck
 
 formatters:
   # Enable specific formatter.

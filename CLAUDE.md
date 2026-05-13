@@ -57,13 +57,13 @@ Backend follows a strict layered architecture — **handler → service → repo
 
 ### Event bus (Busen)
 
-Ech0 uses the in-repo **Busen** library (`github.com/lin-snow/Busen`) as an async in-process event bus. Publishers live at `internal/event/publisher`, subscribers at `internal/event/subscriber` (agent processor, backup scheduler, dead-letter resolver), contracts at `internal/event/contracts`, wiring at `internal/event/registry`. The bus decouples comment/echo/user events from side effects like webhooks, agent runs, and backups. Runtime tuning is via `ECH0_EVENT_*` env vars (buffers, parallelism, webhook worker pool) — see README "Event Runtime Parameters".
+Ech0 uses the in-repo **Busen** library (vendored at `pkg/busen`, imported as `github.com/lin-snow/ech0/pkg/busen`) as an async in-process event bus. Publishers live at `internal/event/publisher`, subscribers at `internal/event/subscriber` (agent processor, backup scheduler, dead-letter resolver), contracts at `internal/event/contracts`, wiring at `internal/event/registry`. The bus decouples comment/echo/user events from side effects like webhooks, agent runs, and backups. Runtime tuning is via `ECH0_EVENT_*` env vars (buffers, parallelism, webhook worker pool) — see README "Event Runtime Parameters".
 
 Webhook dispatch (`internal/webhook`) and agent processing (`internal/agent`) are implemented as event subscribers, not as inline handler calls. When adding cross-cutting side effects, prefer publishing an event over invoking services directly from handlers.
 
 ### Storage (VireFS)
 
-`internal/storage` is a unified abstraction over local disk and S3-compatible object stores. Files are addressed by a flat `key`; `schema.Resolve` + `PathPrefix` map keys to on-disk paths or S3 object keys. Stored `File.url` is a snapshot of the UI-visible URL at write time. The `/api/files` static route serves local content; the `stream` routes are authenticated. `S3SettingStore` is bound to `KeyValueRepository` so S3 config lives in the settings DB, not env. Switching providers / migrating between local and S3 is documented at `docs/usage/storage-migration.md`.
+`internal/storage` is a unified abstraction over local disk and S3-compatible object stores, layered over the in-repo **VireFS** library (vendored at `pkg/virefs`, imported as `github.com/lin-snow/ech0/pkg/virefs`). Files are addressed by a flat `key`; `schema.Resolve` + `PathPrefix` map keys to on-disk paths or S3 object keys. Stored `File.url` is a snapshot of the UI-visible URL at write time. The `/api/files` static route serves local content; the `stream` routes are authenticated. `S3SettingStore` is bound to `KeyValueRepository` so S3 config lives in the settings DB, not env. Switching providers / migrating between local and S3 is documented at `docs/usage/storage-migration.md`.
 
 ### Frontend
 

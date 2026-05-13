@@ -15,8 +15,8 @@ import (
 	"strings"
 	"time"
 
-	virefs "github.com/lin-snow/VireFS"
 	"github.com/lin-snow/ech0/internal/config"
+	"github.com/lin-snow/ech0/pkg/virefs"
 )
 
 type StorageSelector struct {

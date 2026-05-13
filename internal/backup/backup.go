@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	virefs "github.com/lin-snow/VireFS"
-	vizip "github.com/lin-snow/VireFS/plugin/zip"
 	logUtil "github.com/lin-snow/ech0/internal/util/log"
+	"github.com/lin-snow/ech0/pkg/virefs"
+	vizip "github.com/lin-snow/ech0/pkg/virefs/plugin/zip"
 	"go.uber.org/zap"
 )
 

@@ -7,8 +7,8 @@ import (
 	"context"
 	"fmt"
 
-	busen "github.com/lin-snow/Busen"
 	contracts "github.com/lin-snow/ech0/internal/event/contracts"
+	"github.com/lin-snow/ech0/pkg/busen"
 )
 
 type Publisher struct {

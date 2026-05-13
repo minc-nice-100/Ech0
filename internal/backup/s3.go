@@ -7,9 +7,9 @@ import (
 	"sort"
 	"strings"
 
-	virefs "github.com/lin-snow/VireFS"
 	"github.com/lin-snow/ech0/internal/config"
 	logUtil "github.com/lin-snow/ech0/internal/util/log"
+	"github.com/lin-snow/ech0/pkg/virefs"
 	"go.uber.org/zap"
 )
 

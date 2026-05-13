@@ -9,7 +9,6 @@ package di
 
 import (
 	"github.com/google/wire"
-	busen "github.com/lin-snow/Busen"
 	"github.com/lin-snow/ech0/internal/app"
 	"github.com/lin-snow/ech0/internal/cache"
 	"github.com/lin-snow/ech0/internal/database"
@@ -30,6 +29,7 @@ import (
 	"github.com/lin-snow/ech0/internal/transaction"
 	"github.com/lin-snow/ech0/internal/visitor"
 	"github.com/lin-snow/ech0/internal/webhook"
+	"github.com/lin-snow/ech0/pkg/busen"
 	"gorm.io/gorm"
 )
 

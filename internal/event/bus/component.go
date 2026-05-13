@@ -7,8 +7,8 @@ import (
 	"context"
 	"errors"
 
-	busen "github.com/lin-snow/Busen"
 	logUtil "github.com/lin-snow/ech0/internal/util/log"
+	"github.com/lin-snow/ech0/pkg/busen"
 	"go.uber.org/zap"
 )
 

@@ -6,9 +6,9 @@ package registry
 import (
 	"context"
 
-	busen "github.com/lin-snow/Busen"
 	contracts "github.com/lin-snow/ech0/internal/event/contracts"
 	logUtil "github.com/lin-snow/ech0/internal/util/log"
+	"github.com/lin-snow/ech0/pkg/busen"
 	"go.uber.org/zap"
 )
 

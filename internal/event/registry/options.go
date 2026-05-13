@@ -4,9 +4,9 @@
 package registry
 
 import (
-	busen "github.com/lin-snow/Busen"
 	"github.com/lin-snow/ech0/internal/config"
 	eventbus "github.com/lin-snow/ech0/internal/event/bus"
+	"github.com/lin-snow/ech0/pkg/busen"
 )
 
 func DeadLetterSubscribeOptions() []busen.SubscribeOption {
