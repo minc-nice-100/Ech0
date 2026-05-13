@@ -7,8 +7,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	intdispatch "github.com/lin-snow/ech0/pkg/busen/internal/dispatch"
-	"github.com/lin-snow/ech0/pkg/busen/internal/router"
+	intdispatch "github.com/lin-snow/ech0/pkg/busen/dispatch"
+	"github.com/lin-snow/ech0/pkg/busen/router"
 )
 
 // Bus is a typed-first in-process event bus.

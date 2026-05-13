@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"github.com/lin-snow/ech0/internal/config"
-	"github.com/lin-snow/gocap/cap"
+	"github.com/lin-snow/ech0/pkg/gocap/cap"
 )
 
 const defaultSiteKey = "ech0-comment"

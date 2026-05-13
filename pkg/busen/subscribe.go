@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/lin-snow/ech0/pkg/busen/internal/router"
+	"github.com/lin-snow/ech0/pkg/busen/router"
 )
 
 // Subscribe registers a type-based subscription.

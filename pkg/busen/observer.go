@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/lin-snow/ech0/pkg/busen/internal/router"
+	"github.com/lin-snow/ech0/pkg/busen/router"
 )
 
 // Observation represents an accepted delivery for bridge/audit observers.

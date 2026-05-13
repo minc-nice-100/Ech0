@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/lin-snow/ech0/pkg/busen/internal/router"
+	"github.com/lin-snow/ech0/pkg/busen/router"
 )
 
 // Benchmarks in this file focus on the main in-process hot paths:
