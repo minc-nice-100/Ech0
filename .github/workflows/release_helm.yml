@@ -81,6 +81,39 @@ jobs:
         env:
           CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # chart-releaser-action publishes a GitHub release tagged ech0-<version> for the chart artifact.
+      # Created after v<version>, so GitHub silently flips "Latest" onto it; tooling that resolves
+      # /releases/latest (incl. scripts/ech0.sh) then 404s looking for the platform binary.
+      # Re-anchor "Latest" onto the originating v* app release.
+      - name: Reset latest release pointer to app release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_NAME: ${{ github.event_name }}
+          RELEASE_TAG_EVENT: ${{ github.event.release.tag_name }}
+          RELEASE_TAG_INPUT: ${{ github.event.inputs.release_tag }}
+        run: |
+          set -euo pipefail
+
+          release_tag=""
+          if [ "${EVENT_NAME}" = "release" ] && [ -n "${RELEASE_TAG_EVENT:-}" ]; then
+            release_tag="${RELEASE_TAG_EVENT}"
+          elif [ -n "${RELEASE_TAG_INPUT:-}" ]; then
+            release_tag="${RELEASE_TAG_INPUT}"
+          fi
+
+          if [ -z "${release_tag}" ]; then
+            echo "No app release tag resolved; skip latest pointer reset."
+            exit 0
+          fi
+
+          if ! gh release view "${release_tag}" >/dev/null 2>&1; then
+            echo "Release ${release_tag} not found; skip latest pointer reset."
+            exit 0
+          fi
+
+          gh release edit "${release_tag}" --latest
+          echo "Re-marked ${release_tag} as latest."
+
       - name: Generate release page
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
