@@ -12,6 +12,15 @@ import TheComment from '@/components/advanced/TheComment.vue'
 
 <style scoped>
 .echo-interactions {
-  border-top: 1px dashed var(--color-border-subtle);
+  background-image: linear-gradient(
+    to right,
+    var(--color-border-subtle) 0,
+    var(--color-border-subtle) 5px,
+    transparent 5px,
+    transparent 8px
+  );
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: left top;
 }
 </style>

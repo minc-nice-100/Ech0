@@ -174,7 +174,6 @@ onMounted(() => {
     <section class="dashboard-meta">
       <span class="meta-item meta-item-strong">PANEL DASHBOARD</span>
       <span class="meta-item">DATE {{ todayText }}</span>
-      <span class="meta-item">VERSION {{ settingStore.hello?.version || '--' }}</span>
     </section>
 
     <!-- Stat cards -->
