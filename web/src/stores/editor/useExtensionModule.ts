@@ -4,7 +4,8 @@
 import { computed, ref, type Ref } from 'vue'
 import { ExtensionType } from '@/enums/enums'
 import { theToast } from '@/utils/toast'
-import type { ExtensionToAdd, LocationToAdd, Translate, WebsiteToAdd } from './types'
+import { parseTweetUrl } from '@/utils/tweet'
+import type { ExtensionToAdd, LocationToAdd, Translate, TweetToAdd, WebsiteToAdd } from './types'
 
 type ExtensionModuleDeps = {
   echoToAdd: Ref<App.Api.Ech0.EchoToAdd>
@@ -22,6 +23,7 @@ export function useExtensionModule({ echoToAdd, t }: ExtensionModuleDeps) {
     longitude: null,
     placeholder: '',
   })
+  const tweetToAdd = ref<TweetToAdd>({ url: '', username: '', statusId: '' })
 
   const hasExtension = computed(() => {
     const ext = extensionToAdd.value.extension
@@ -45,6 +47,11 @@ export function useExtensionModule({ echoToAdd, t }: ExtensionModuleDeps) {
         longitude <= 180 &&
         !!placeholder.trim()
       )
+    }
+
+    if (extType === ExtensionType.TWEET) {
+      const { url, username, statusId } = tweetToAdd.value
+      return !!url && !!username && !!statusId
     }
 
     return !!ext && !!extType
@@ -100,10 +107,24 @@ export function useExtensionModule({ echoToAdd, t }: ExtensionModuleDeps) {
     return true
   }
 
+  function handleTweetExtension(): boolean {
+    const parsed = parseTweetUrl(tweetToAdd.value.url)
+    if (!parsed) {
+      theToast.error(t('editor.tweetUrlInvalid'))
+      return false
+    }
+
+    tweetToAdd.value = parsed
+    extensionToAdd.value.extension_type = ExtensionType.TWEET
+    extensionToAdd.value.extension = parsed.url
+    return true
+  }
+
   function clearExtension() {
     extensionToAdd.value.extension = ''
     extensionToAdd.value.extension_type = ''
     locationToAdd.value = { latitude: null, longitude: null, placeholder: '' }
+    tweetToAdd.value = { url: '', username: '', statusId: '' }
     echoToAdd.value.extension = null
   }
 
@@ -120,6 +141,9 @@ export function useExtensionModule({ echoToAdd, t }: ExtensionModuleDeps) {
         break
       case ExtensionType.LOCATION:
         if (!handleLocationExtension()) return
+        break
+      case ExtensionType.TWEET:
+        if (!handleTweetExtension()) return
         break
       default:
         break
@@ -190,6 +214,18 @@ export function useExtensionModule({ echoToAdd, t }: ExtensionModuleDeps) {
         }
         return
       }
+      case ExtensionType.TWEET: {
+        const { url, username, statusId } = tweetToAdd.value
+        if (!url || !username || !statusId) {
+          echoToAdd.value.extension = null
+          return
+        }
+        echoToAdd.value.extension = {
+          type: ExtensionType.TWEET,
+          payload: { url, username, statusId },
+        }
+        return
+      }
       default:
         echoToAdd.value.extension = null
     }
@@ -202,6 +238,7 @@ export function useExtensionModule({ echoToAdd, t }: ExtensionModuleDeps) {
     extensionToAdd.value = { extension: '', extension_type: '' }
     locationToAdd.value = { latitude: null, longitude: null, placeholder: '' }
     websiteToAdd.value = { title: '', site: '' }
+    tweetToAdd.value = { url: '', username: '', statusId: '' }
   }
 
   return {
@@ -212,6 +249,7 @@ export function useExtensionModule({ echoToAdd, t }: ExtensionModuleDeps) {
     githubRepo,
     extensionToAdd,
     locationToAdd,
+    tweetToAdd,
     // computed
     hasExtension,
     // methods

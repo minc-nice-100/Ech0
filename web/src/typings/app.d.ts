@@ -161,7 +161,7 @@ declare namespace App {
     }
 
     namespace Ech0 {
-      type EchoExtensionType = 'MUSIC' | 'VIDEO' | 'GITHUBPROJ' | 'WEBSITE' | 'LOCATION'
+      type EchoExtensionType = 'MUSIC' | 'VIDEO' | 'GITHUBPROJ' | 'WEBSITE' | 'LOCATION' | 'TWEET'
       type EchoExtension =
         | { type: 'MUSIC'; payload: { url: string } }
         | { type: 'VIDEO'; payload: { videoId: string } }
@@ -170,6 +170,10 @@ declare namespace App {
         | {
             type: 'LOCATION'
             payload: { placeholder: string; latitude: number; longitude: number }
+          }
+        | {
+            type: 'TWEET'
+            payload: { url: string; username: string; statusId: string }
           }
 
       type ParamsByPagination = {

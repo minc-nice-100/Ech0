@@ -57,6 +57,10 @@
     "videoId": "Video ID",
     "githubUrlPlaceholder": "https://github.com/username/repo",
     "githubShare": "GitHubプロジェクトをシェア",
+    "tweetShare": "X（旧 Twitter）投稿をシェア",
+    "tweetHint": "x.com または twitter.com の投稿 URL を貼り付けてください",
+    "tweetUrlPlaceholder": "https://x.com/username/status/1234567890",
+    "tweetUrlInvalid": "投稿 URL の形式が正しくありません",
     "websiteTitlePlaceholder": "サイトタイトル...",
     "websiteUrlPlaceholder": "https://example.com",
     "websiteShare": "サイトリンクをシェア",
@@ -82,6 +86,7 @@
     "addGithubProject": "GitHubプロジェクトを追加",
     "addWebsiteLink": "サイトリンクを追加",
     "addLocation": "位置情報を追加",
+    "addTweet": "X 投稿を追加",
     "locationShare": "位置情報",
     "locationHint": "地図をタップするか座標を入力",
     "locationUseCurrent": "現在地を取得",
@@ -112,6 +117,7 @@
     "extVideo": "動画",
     "extGithubProject": "GitHub プロジェクト",
     "extWebsiteLink": "サイトリンク",
+    "extTweet": "X 投稿",
     "extText": "テキスト",
     "extImage": "画像",
     "extGeneric": "拡張",
@@ -357,6 +363,15 @@
     "searchTitle": "検索",
     "searchPlaceholder": "検索...",
     "rssTitle": "RSS"
+  },
+  "zenMode": {
+    "tooltip": "禅モードに入る（没入ブラウズ）",
+    "exit": "禅モードを終了",
+    "openDetail": "詳細を開く",
+    "bwOn": "モノクロ表示に切り替え（カードをホバーで色が戻ります）",
+    "bwOff": "カラー表示に戻す",
+    "empty": "コンテンツはまだありません",
+    "noMore": "これで全部です"
   },
   "commandPalette": {
     "title": "クイック検索",
@@ -954,7 +969,9 @@
     "website": "ウェブサイト",
     "location": "位置情報",
     "locationOpenInMaps": "Google マップで開く",
-    "jump": "開く"
+    "jump": "開く",
+    "tweet": "X 投稿",
+    "tweetView": "X で元の投稿を表示"
   },
   "recentCard": {
     "mysteriousRecent": "作者は最近ミステリアス〜",

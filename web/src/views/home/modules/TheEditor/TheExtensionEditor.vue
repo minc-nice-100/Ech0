@@ -58,6 +58,28 @@
         :placeholder="t('editor.githubUrlPlaceholder')"
       />
     </div>
+    <!-- X (Twitter) 推文分享 -->
+    <div v-if="editorStore.currentExtensionType === ExtensionType.TWEET">
+      <div class="text-[var(--color-text-secondary)] font-bold mb-1">
+        {{ t('editor.tweetShare') }}
+      </div>
+      <p class="text-[var(--color-text-muted)] text-sm mb-1">{{ t('editor.tweetHint') }}</p>
+      <BaseInput
+        v-model="editorStore.tweetToAdd.url"
+        class="rounded-lg h-auto w-full"
+        :placeholder="t('editor.tweetUrlPlaceholder')"
+      />
+      <div
+        v-if="editorStore.tweetToAdd.url.trim()"
+        class="mt-1 text-[var(--color-text-muted)] text-md"
+      >
+        {{ t('editor.parseResult') }}:
+        <span v-if="parsedTweet" class="text-[var(--color-accent)]">
+          @{{ parsedTweet.username }} · {{ parsedTweet.statusId }}
+        </span>
+        <span v-else class="text-[var(--color-danger)]">{{ t('editor.tweetUrlInvalid') }}</span>
+      </div>
+    </div>
     <!-- 网站链接分享 -->
     <div v-if="editorStore.currentExtensionType === ExtensionType.WEBSITE">
       <div class="text-[var(--color-text-secondary)] font-bold mb-1">
@@ -147,6 +169,7 @@ import LocationPicker from '@/components/advanced/extension/shared/LocationPicke
 import { useReverseGeocoding } from '@/components/advanced/extension/shared/useReverseGeocoding'
 import { ExtensionType } from '@/enums/enums'
 import { parseMusicURL, extractAndCleanMusicURL } from '@/utils/other' // 导入新函数
+import { parseTweetUrl } from '@/utils/tweet'
 import { useEditorStore } from '@/stores'
 import { computed, ref, watch } from 'vue' // 从 vue 导入 watch
 import { fetchGetWebsiteTitle } from '@/service/api'
@@ -156,6 +179,9 @@ import { useI18n } from 'vue-i18n'
 const editorStore = useEditorStore()
 const isFetchingWebsiteTitle = ref(false)
 const { t } = useI18n()
+
+// =============== Tweet 扩展 ===============
+const parsedTweet = computed(() => parseTweetUrl(editorStore.tweetToAdd.url))
 
 // =============== Location 扩展 ===============
 const isGeolocating = ref(false)

@@ -21,6 +21,10 @@
       v-else-if="echo.extension.type === ExtensionType.LOCATION"
       :location="echo.extension.payload"
     />
+    <TweetCard
+      v-else-if="echo.extension.type === ExtensionType.TWEET && echo.extension.payload?.url"
+      :payload="echo.extension.payload"
+    />
   </div>
 </template>
 
@@ -32,6 +36,7 @@ const VideoCard = defineAsyncComponent(() => import('./cards/VideoCard.vue'))
 const GithubCard = defineAsyncComponent(() => import('./cards/GithubCard.vue'))
 const WebsiteCard = defineAsyncComponent(() => import('./cards/WebsiteCard.vue'))
 const LocationCard = defineAsyncComponent(() => import('./cards/LocationCard.vue'))
+const TweetCard = defineAsyncComponent(() => import('./cards/TweetCard.vue'))
 
 defineProps<{
   echo: {

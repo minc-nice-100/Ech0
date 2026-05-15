@@ -57,6 +57,10 @@
     "videoId": "Video ID",
     "githubUrlPlaceholder": "https://github.com/username/repo",
     "githubShare": "GitHub project share",
+    "tweetShare": "X (Twitter) post share",
+    "tweetHint": "Paste an x.com or twitter.com post URL",
+    "tweetUrlPlaceholder": "https://x.com/username/status/1234567890",
+    "tweetUrlInvalid": "Invalid post URL",
     "websiteTitlePlaceholder": "Website title...",
     "websiteUrlPlaceholder": "https://example.com",
     "websiteShare": "Website link share",
@@ -82,6 +86,7 @@
     "addGithubProject": "Add GitHub project",
     "addWebsiteLink": "Add website link",
     "addLocation": "Add location",
+    "addTweet": "Add X post",
     "locationShare": "Location",
     "locationHint": "Click on the map or enter coordinates",
     "locationUseCurrent": "Use current location",
@@ -112,6 +117,7 @@
     "extVideo": "Video",
     "extGithubProject": "GitHub Project",
     "extWebsiteLink": "Website Link",
+    "extTweet": "X Post",
     "extText": "Text",
     "extImage": "Image",
     "extGeneric": "Extension",
@@ -357,6 +363,15 @@
     "searchTitle": "Search",
     "searchPlaceholder": "Search...",
     "rssTitle": "RSS"
+  },
+  "zenMode": {
+    "tooltip": "Enter Zen Mode (immersive browse)",
+    "exit": "Exit Zen Mode",
+    "openDetail": "Open detail",
+    "bwOn": "Switch to monochrome (hover a card to restore color)",
+    "bwOff": "Restore color",
+    "empty": "No content yet",
+    "noMore": "You've reached the end"
   },
   "commandPalette": {
     "title": "Quick search",
@@ -954,7 +969,9 @@
     "website": "Website",
     "location": "Location",
     "locationOpenInMaps": "Open in Google Maps",
-    "jump": "Open"
+    "jump": "Open",
+    "tweet": "X Post",
+    "tweetView": "View original post on X"
   },
   "recentCard": {
     "mysteriousRecent": "The author has been mysterious lately~",

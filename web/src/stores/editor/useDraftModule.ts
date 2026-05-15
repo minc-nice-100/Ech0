@@ -6,7 +6,14 @@ import { ImageLayout } from '@/enums/enums'
 import { localStg } from '@/utils/storage'
 import { theToast } from '@/utils/toast'
 import { useBaseDialog } from '@/composables/useBaseDialog'
-import type { EditorDraft, ExtensionToAdd, LocationToAdd, Translate, WebsiteToAdd } from './types'
+import type {
+  EditorDraft,
+  ExtensionToAdd,
+  LocationToAdd,
+  Translate,
+  TweetToAdd,
+  WebsiteToAdd,
+} from './types'
 
 const EDITOR_DRAFT_STORAGE_KEY = 'editor_echo_draft_v1'
 const EDITOR_DRAFT_TTL_MS = 24 * 60 * 60 * 1000
@@ -21,6 +28,7 @@ type DraftModuleDeps = {
   githubRepo: Ref<string>
   extensionToAdd: Ref<ExtensionToAdd>
   locationToAdd: Ref<LocationToAdd>
+  tweetToAdd: Ref<TweetToAdd>
   tagToAdd: Ref<string[]>
   isUpdateMode: Ref<boolean>
   resetAttachments: (files: App.Api.Ech0.FileToAdd[]) => void
@@ -37,6 +45,7 @@ export function useDraftModule(deps: DraftModuleDeps) {
     githubRepo,
     extensionToAdd,
     locationToAdd,
+    tweetToAdd,
     tagToAdd,
     isUpdateMode,
     resetAttachments,
@@ -68,8 +77,17 @@ export function useDraftModule(deps: DraftModuleDeps) {
       locationToAdd.value.latitude !== null ||
       locationToAdd.value.longitude !== null ||
       !!locationToAdd.value.placeholder.trim()
+    const hasTweetInput = !!tweetToAdd.value.url?.trim()
 
-    return hasText || hasTag || hasFiles || hasWebsiteInput || hasExtInput || hasLocationInput
+    return (
+      hasText ||
+      hasTag ||
+      hasFiles ||
+      hasWebsiteInput ||
+      hasExtInput ||
+      hasLocationInput ||
+      hasTweetInput
+    )
   }
 
   const saveDraftNow = () => {
@@ -113,6 +131,11 @@ export function useDraftModule(deps: DraftModuleDeps) {
         latitude: locationToAdd.value.latitude,
         longitude: locationToAdd.value.longitude,
         placeholder: locationToAdd.value.placeholder || '',
+      },
+      tweetToAdd: {
+        url: tweetToAdd.value.url || '',
+        username: tweetToAdd.value.username || '',
+        statusId: tweetToAdd.value.statusId || '',
       },
       tagToAdd: Array.isArray(tagToAdd.value) ? [...tagToAdd.value] : [],
     }
@@ -175,6 +198,11 @@ export function useDraftModule(deps: DraftModuleDeps) {
                 : null,
             placeholder: draft.locationToAdd?.placeholder || '',
           }
+          tweetToAdd.value = {
+            url: draft.tweetToAdd?.url || '',
+            username: draft.tweetToAdd?.username || '',
+            statusId: draft.tweetToAdd?.statusId || '',
+          }
           tagToAdd.value = Array.isArray(draft.tagToAdd) ? [...draft.tagToAdd] : []
           theToast.info(t('editor.restoreDraftRecovered'))
         } finally {
@@ -198,6 +226,7 @@ export function useDraftModule(deps: DraftModuleDeps) {
         githubRepo,
         extensionToAdd,
         locationToAdd,
+        tweetToAdd,
         tagToAdd,
         isUpdateMode,
       ],

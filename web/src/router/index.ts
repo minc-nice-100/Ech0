@@ -13,7 +13,7 @@ const router = createRouter({
   // home 路由由 HomePage 自己在 echo 列表渲染完成后恢复滚动，避免内容未撑开时
   // savedPosition 被夹到 0、出现一次"跳到顶部再跳回"的闪烁。
   scrollBehavior(to, _from, savedPosition) {
-    if (to.name === 'home') {
+    if (to.name === 'home' || to.name === 'zen') {
       return false
     }
     if (savedPosition) {
@@ -146,6 +146,17 @@ const router = createRouter({
       meta: {
         title: 'Hub',
         description: 'Discover and explore curated content in Ech0 hub.',
+      },
+    },
+    {
+      path: '/zen',
+      name: 'zen',
+      component: () => import('../views/zen/ZenView.vue'),
+      meta: {
+        title: 'Zen',
+        description: 'Browse all echos in an immersive masonry view.',
+        optionalAuth: true,
+        noindex: true,
       },
     },
     {

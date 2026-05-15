@@ -43,6 +43,13 @@
           :tooltip="t('editor.addLocation')"
           @click="handleAddExtension(ExtensionType.LOCATION)"
         />
+        <!-- 添加 X 推文 -->
+        <BaseButton
+          :icon="XBrand"
+          class="w-7 h-7 rounded-xs"
+          :tooltip="t('editor.addTweet')"
+          @click="handleAddExtension(ExtensionType.TWEET)"
+        />
       </div>
     </div>
   </div>
@@ -54,6 +61,7 @@ import Music from '@/components/icons/music.vue'
 import Video from '@/components/icons/video.vue'
 import Githubproj from '@/components/icons/githubproj.vue'
 import MapPin from '@/components/icons/mappin.vue'
+import XBrand from '@/components/icons/tweet.vue'
 import BaseButton from '@/components/common/BaseButton.vue'
 
 import { Mode, ExtensionType } from '@/enums/enums'

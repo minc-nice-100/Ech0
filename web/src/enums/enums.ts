@@ -17,6 +17,7 @@ export enum ExtensionType {
   GITHUBPROJ = 'GITHUBPROJ',
   WEBSITE = 'WEBSITE',
   LOCATION = 'LOCATION',
+  TWEET = 'TWEET',
 }
 
 // 图片布局

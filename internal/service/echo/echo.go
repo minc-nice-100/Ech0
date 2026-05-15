@@ -548,6 +548,18 @@ func normalizeEchoExtension(ext *model.EchoExtension) (*model.EchoExtension, err
 			"longitude":   lng,
 			"placeholder": placeholder,
 		}
+	case model.Extension_TWEET:
+		url := strings.TrimSpace(getPayloadString(ext.Payload, "url"))
+		username := strings.TrimSpace(getPayloadString(ext.Payload, "username"))
+		statusID := strings.TrimSpace(getPayloadString(ext.Payload, "statusId"))
+		if url == "" || username == "" || statusID == "" {
+			return nil, fmt.Errorf("extension payload.url, payload.username and payload.statusId are required for TWEET")
+		}
+		ext.Payload = map[string]interface{}{
+			"url":      httpUtil.TrimURL(url),
+			"username": username,
+			"statusId": statusID,
+		}
 	default:
 		return nil, fmt.Errorf("unsupported extension type: %s", ext.Type)
 	}

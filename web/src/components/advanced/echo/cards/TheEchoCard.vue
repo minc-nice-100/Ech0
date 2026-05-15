@@ -351,6 +351,48 @@ onBeforeUnmount(() => {
   pointer-events: none;
 }
 
+.echo-timeline:hover .echo-open-btn {
+  animation: echo-open-nudge-left 1200ms ease-out both;
+}
+
+.echo-open-btn:focus-visible {
+  animation: echo-open-nudge-left 1200ms ease-out both;
+}
+
+@keyframes echo-open-nudge-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  16% {
+    transform: translateX(-4px);
+  }
+
+  28% {
+    transform: translateX(1px);
+  }
+
+  42% {
+    transform: translateX(-3px);
+  }
+
+  54% {
+    transform: translateX(1px);
+  }
+
+  68% {
+    transform: translateX(-2px);
+  }
+
+  80% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .menu-row {
   display: flex;
   align-items: center;

@@ -76,6 +76,7 @@ const (
 	Extension_GITHUBPROJ = "GITHUBPROJ"
 	Extension_WEBSITE    = "WEBSITE"
 	Extension_LOCATION   = "LOCATION"
+	Extension_TWEET      = "TWEET"
 
 	LayoutWaterfall  = "waterfall"
 	LayoutGrid       = "grid"

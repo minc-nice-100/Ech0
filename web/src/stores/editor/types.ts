@@ -17,6 +17,12 @@ export type WebsiteToAdd = {
   site: string
 }
 
+export type TweetToAdd = {
+  url: string
+  username: string
+  statusId: string
+}
+
 export type EditorDraft = {
   savedAt: number
   echoToAdd: Pick<App.Api.Ech0.EchoToAdd, 'content' | 'private' | 'layout' | 'extension'>
@@ -27,6 +33,7 @@ export type EditorDraft = {
   githubRepo: string
   extensionToAdd: ExtensionToAdd
   locationToAdd: LocationToAdd
+  tweetToAdd: TweetToAdd
   tagToAdd: string[]
 }
 

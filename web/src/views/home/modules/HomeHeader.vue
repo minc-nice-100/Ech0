@@ -35,8 +35,17 @@
           :aria-label="t('homeNav.githubAction')"
           class="home-header__link-icon"
         >
-          <Github class="w-4 h-4" />
+          <Github class="w-5 h-5" />
         </a> -->
+        <button
+          type="button"
+          v-tooltip="t('zenMode.tooltip')"
+          :aria-label="t('zenMode.tooltip')"
+          class="home-header__link-icon"
+          @click="handleGoZen"
+        >
+          <Zen class="w-4 h-4" />
+        </button>
         <button
           type="button"
           v-tooltip="themeToggleTooltip"
@@ -80,6 +89,7 @@ import LeafIcon from '@/components/icons/leaf.vue'
 import Rss from '@/components/icons/rss.vue'
 import Auth from '@/components/icons/auth.vue'
 import Signoff from '@/components/icons/signoff.vue'
+import Zen from '@/components/icons/zen.vue'
 import { storeToRefs } from 'pinia'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -182,6 +192,10 @@ const handleThemeToggle = async () => {
 
 const handleGoExplore = async () => {
   await router.push({ name: 'home' })
+}
+
+const handleGoZen = async () => {
+  await router.push({ name: 'zen' })
 }
 
 const handleGoLogin = async () => {
@@ -301,12 +315,13 @@ onBeforeUnmount(() => {
 .home-header__links {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
 }
 
 .home-header__link-icon {
   display: inline-flex;
-  padding: 0.2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
   color: var(--color-text-muted);
   border-radius: 0.375rem;
   transition:

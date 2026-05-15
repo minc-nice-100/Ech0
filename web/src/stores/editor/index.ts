@@ -57,6 +57,7 @@ export const useEditorStore = defineStore('editorStore', () => {
     githubRepo: extension.githubRepo,
     extensionToAdd: extension.extensionToAdd,
     locationToAdd: extension.locationToAdd,
+    tweetToAdd: extension.tweetToAdd,
     tagToAdd,
     isUpdateMode,
     resetAttachments: files.resetAttachments,
@@ -307,6 +308,7 @@ export const useEditorStore = defineStore('editorStore', () => {
     githubRepo: extension.githubRepo,
     extensionToAdd: extension.extensionToAdd,
     locationToAdd: extension.locationToAdd,
+    tweetToAdd: extension.tweetToAdd,
     tagToAdd,
 
     // ===== 方法 =====

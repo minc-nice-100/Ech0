@@ -183,7 +183,7 @@ const handleLikeEcho = async () => {
   /* 与头像水平居中对齐：card padding-top (p-3 = 0.75rem) + header mt-1 (0.25rem) + (avatar 1.5rem - bar 1rem) / 2 */
   top: 1.25rem;
   left: 0;
-  width: 3px;
+  width: 2px;
   height: 1rem;
   border-radius: 0 2px 2px 0;
   background: var(--color-accent);
