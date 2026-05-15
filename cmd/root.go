@@ -41,15 +41,6 @@ var versionCmd = &cobra.Command{
 	},
 }
 
-// infoCmd 是查看当前信息的命令
-var infoCmd = &cobra.Command{
-	Use:   "info",
-	Short: "Print Ech0 information",
-	Run: func(cmd *cobra.Command, args []string) {
-		cli.DoEch0Info()
-	},
-}
-
 // helloCmd 是输出 Ech0 Logo 的命令
 var helloCmd = &cobra.Command{
 	Use:   "hello",
@@ -65,7 +56,6 @@ func init() {
 	cobra.MousetrapHelpText = ""
 	rootCmd.AddCommand(tuiCmd)
 	rootCmd.AddCommand(versionCmd)
-	rootCmd.AddCommand(infoCmd)
 	rootCmd.AddCommand(helloCmd)
 }
 

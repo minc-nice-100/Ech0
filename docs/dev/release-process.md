@@ -38,7 +38,7 @@ const (
 )
 ```
 
-Everywhere else (`/hello`, `/healthz`, the About page, `ech0 version`, `ech0 info`, MCP server identification, connect federation) reads from this single const. Build-time metadata (`Commit`, `BuildTime`) is injected via `-ldflags -X` from the Makefile / Dockerfile / release workflow.
+Everywhere else (`/hello`, `/healthz`, the About page, `ech0 version`, MCP server identification, connect federation) reads from this single const. Build-time metadata (`Commit`, `BuildTime`) is injected via `-ldflags -X` from the Makefile / Dockerfile / release workflow.
 
 **Never edit the version string in any other file.** If you find a hardcoded version anywhere, that is a bug to fix, not a place to also bump.
 
@@ -138,7 +138,7 @@ After the workflow completes:
    gh release view vX.Y.Z              # check files, draft status
    gh run watch                        # if still running
    ```
-   Download the linux/amd64 binary, run `./ech0 version` and `./ech0 info`, sanity-check that the version + commit hash match what you tagged.
+   Download the linux/amd64 binary, run `./ech0 version`, and sanity-check that the version + commit hash match what you tagged.
 
 2. **Promote the draft release to published.** GitHub release notes default to auto-generated PR titles since the last release; replace them with the relevant `[X.Y.Z]` section from `CHANGELOG.md`.
 

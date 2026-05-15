@@ -69,17 +69,32 @@ func DoBackup() {
 }
 
 func DoVersion() {
+	msg := fmt.Sprintf(
+		"Version: v%s\nCommit: %s\nBuild Time: %s\nAuthor: %s\nWebsite: https://ech0.app/\nLicense: %s\nSource: %s\n%s",
+		versionPkg.Version,
+		versionPkg.Commit,
+		versionPkg.BuildTime,
+		versionPkg.Author,
+		versionPkg.License,
+		versionPkg.RepoURL,
+		versionPkg.Copyright(),
+	)
+	if versionPkg.BuildTime == "" {
+		msg = fmt.Sprintf(
+			"Version: v%s\nCommit: %s\nAuthor: %s\nWebsite: https://ech0.app/\nLicense: %s\nSource: %s\n%s",
+			versionPkg.Version,
+			versionPkg.Commit,
+			versionPkg.Author,
+			versionPkg.License,
+			versionPkg.RepoURL,
+			versionPkg.Copyright(),
+		)
+	}
 	item := struct{ Title, Msg string }{
-		Title: "📦 Version",
-		Msg:   "v" + versionPkg.Version,
+		Title: "📦 Ech0",
+		Msg:   msg,
 	}
 	tui.PrintCLIWithBox(item)
-}
-
-func DoEch0Info() {
-	if _, err := fmt.Fprintln(os.Stdout, tui.GetEch0Info()); err != nil {
-		fmt.Fprintf(os.Stderr, "failed to print ech0 info: %v\n", err)
-	}
 }
 
 func DoHello() {
@@ -104,9 +119,8 @@ func DoTui() {
 		}
 
 		options = append(options,
-			huh.NewOption("🦖 Show info", "info"),
 			huh.NewOption("📦 Run backup", "backup"),
-			huh.NewOption("📌 Show version", "version"),
+			huh.NewOption("📌 About Ech0", "version"),
 			huh.NewOption("❌ Exit", "exit"),
 		)
 
@@ -127,9 +141,6 @@ func DoTui() {
 			DoServe()
 		case "servebusy":
 			tui.PrintCLIInfo("ℹ️ Service status", "The web service is running in another process and cannot be stopped from here")
-		case "info":
-			tui.ClearScreen()
-			DoEch0Info()
 		case "backup":
 			DoBackup()
 		case "version":

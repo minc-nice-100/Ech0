@@ -11,7 +11,6 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
-	versionPkg "github.com/lin-snow/ech0/internal/version"
 )
 
 var (
@@ -117,6 +116,13 @@ func GetCLIPrintWithBox(items ...CLIInfoItem) string {
 	var content string
 	for i, item := range items {
 		line := infoStyle.Render(titleStyle.Render(item.Title) + ": " + highlight.Render(item.Msg))
+		if strings.Contains(item.Msg, "\n") {
+			line = lipgloss.JoinVertical(
+				lipgloss.Left,
+				infoStyle.Render(titleStyle.Render(item.Title)),
+				infoStyle.Render(highlight.Render(item.Msg)),
+			)
+		}
 		if i > 0 {
 			content += "\n"
 		}
@@ -146,31 +152,4 @@ func ClearScreen() {
 	if err := cmd.Run(); err != nil {
 		fmt.Fprintf(os.Stderr, "failed to clear screen: %v\n", err)
 	}
-}
-
-// GetEch0Info 获取Ech0信息
-func GetEch0Info() string {
-	content := lipgloss.JoinVertical(
-		lipgloss.Left,
-		infoStyle.Render(
-			"📦 "+titleStyle.Render("Version")+": "+highlight.Render(versionPkg.Version),
-		),
-		infoStyle.Render("🧙 "+titleStyle.Render("Author")+": "+highlight.Render("L1nSn0w")),
-		infoStyle.Render(
-			"👉 "+titleStyle.Render("Website")+": "+highlight.Render("https://ech0.app/"),
-		),
-		infoStyle.Render(
-			"👉 "+titleStyle.Render(
-				"GitHub",
-			)+": "+highlight.Render(
-				"https://github.com/lin-snow/Ech0",
-			),
-		),
-	)
-
-	full := lipgloss.JoinVertical(lipgloss.Left,
-		boxStyle.Render(content),
-	)
-
-	return full
 }

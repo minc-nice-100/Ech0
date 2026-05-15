@@ -41,7 +41,7 @@ go test -run TestName ./path/to/pkg             # by name
 
 Run a single frontend test: `pnpm -C web exec vitest run path/to/file.spec.ts` (or `-t "test name"`).
 
-Binary entrypoint is `cmd/ech0/main.go`. CLI verbs (Cobra): `ech0 serve` (HTTP), bare `ech0`/`ech0 tui` (TUI), `ech0 version`, `ech0 info`, `ech0 hello`. The `backup.go` CLI command provides snapshot export outside the web UI.
+Binary entrypoint is `cmd/ech0/main.go`. CLI verbs (Cobra): `ech0 serve` (HTTP), bare `ech0`/`ech0 tui` (TUI), `ech0 version`, `ech0 hello`. The `backup.go` CLI command provides snapshot export outside the web UI.
 
 ## Architecture
 

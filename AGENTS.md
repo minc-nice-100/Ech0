@@ -73,7 +73,7 @@ In-process async event bus. Publishers at `internal/event/publisher`, subscriber
 
 ### Entry points
 
-- CLI: `cmd/ech0/main.go` (Cobra: `ech0 serve`, `ech0 tui`, `ech0 version`, `ech0 info`, `ech0 hello`)
+- CLI: `cmd/ech0/main.go` (Cobra: `ech0 serve`, `ech0 tui`, `ech0 version`, `ech0 hello`)
 - HTTP routes: `internal/router/*.go`, wired in `internal/server/provider.go`
 - Config singleton: `config.Config()` via `internal/config/config.go` (env vars parsed with `caarlos0/env`)
 - Bootstrap: `internal/bootstrap/bootstrap.go` runs before Cobra dispatches

@@ -924,6 +924,7 @@
     "viewSourceAtCommit": "GitHub で commit {'@'} {commit} のソースを見る",
     "viewRelease": "v{version} リリースノート",
     "buildTime": "ビルド時刻 {time}",
+    "agplNotice": "このサービスが Ech0 を変更している場合、AGPL-3.0 によりネットワーク利用者はデプロイ中バージョンの完全な対応ソースコードを受け取る権利があります。",
     "poweredBy": "❤️ を込めて · Powered by Ech0"
   },
   "echoPage": {
