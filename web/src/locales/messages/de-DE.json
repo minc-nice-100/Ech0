@@ -924,7 +924,6 @@
     "viewSourceAtCommit": "Quellcode {'@'} {commit} auf GitHub ansehen",
     "viewRelease": "Release-Notes für v{version}",
     "buildTime": "Gebaut am {time}",
-    "agplNotice": "Wenn dieser Dienst Ech0 verändert, gibt AGPL-3.0 Netzwerk-Nutzern das Recht, den vollständigen korrespondierenden Quellcode der bereitgestellten Version zu erhalten.",
     "poweredBy": "Mit ❤️ gebaut · Powered by Ech0"
   },
   "echoPage": {

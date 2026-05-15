@@ -104,9 +104,6 @@
               {{ license }}
             </a>
           </p>
-          <p class="about-section__notice">
-            {{ t('about.agplNotice') }}
-          </p>
         </section>
 
         <footer class="about-footer">
@@ -407,17 +404,6 @@ const sourceLinkLabel = computed(() =>
   font-family: var(--font-family-mono, ui-monospace, SFMono-Regular, monospace);
   font-size: 0.75rem;
   color: var(--color-text-muted);
-}
-
-.about-section__notice {
-  margin: 0.1rem 0 0;
-  padding: 0.55rem 0.65rem;
-  border: 1px dashed color-mix(in oklab, var(--color-text-muted) 38%, transparent);
-  border-radius: var(--radius-sm);
-  font-size: 0.8125rem;
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-  background: color-mix(in oklab, var(--color-text-muted) 5%, transparent);
 }
 
 .about-list {
