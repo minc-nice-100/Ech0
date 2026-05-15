@@ -6,6 +6,18 @@ This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html),
 
 For releases prior to v4.6.5, see the [GitHub releases page](https://github.com/lin-snow/Ech0/releases) — earlier release notes are not retroactively imported here.
 
+
+## [4.8.1] - 2026-05-15
+
+### Added
+
+- **Zen mode** for a cleaner, distraction-free writing and reading experience.
+- **New Tweet card support**, improving how Tweet/X links are displayed in Echo content.
+
+### Changed
+
+- **CLI / TUI experience refined** with small usability and presentation improvements.
+
 ## [4.8.0] - 2026-05-13
 
 ### Added
